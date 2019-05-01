@@ -1,0 +1,10 @@
+name 'device42_test'
+maintainer 'Device42'
+maintainer_email 'support@device42.com'
+license 'Apache 2.0'
+description 'Installs/Configures device42_test'
+long_description 'Installs/Configures device42_test'
+version '0.1.0'
+chef_version '>= 13.0'
+
+depends 'device42'

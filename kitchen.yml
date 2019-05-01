@@ -1,0 +1,43 @@
+---
+driver:
+  name: vagrant
+  provider: virtualbox
+
+provisioner:
+  name: chef_zero
+  client_rb:
+    ssl_verify_mode: ":verify_none"
+    log_level: ":debug"
+  data_bags_path: ./test/fixtures/data_bags
+  attributes:
+    device42:
+      instance: <%= ENV['D42_URI'] %>
+      user: <%= ENV['D42_USER'] %>
+      password: <%= ENV['D42_PASSWORD'] %>
+
+verifier:
+ name: inspec
+ inspec_tests:
+   - test/integration/default
+ reporter:
+   - cli
+   - junit:/tmp/inspec.xml
+ attributes:
+   instance: <%= ENV['D42_URI'] %>
+   user: <%= ENV['D42_USER'] %>
+   password: <%= ENV['D42_PASSWORD'] %>
+
+platforms:
+- name: centos-7
+- name: centos-6
+- name: ubuntu-16.04
+- name: ubuntu-18.04
+
+suites:
+- name: create-device
+  run_list:
+    - recipe[device42_test::create_device]
+
+- name: reserve-ip
+  run_list:
+    - recipe[device42_test::reserve_ip]
