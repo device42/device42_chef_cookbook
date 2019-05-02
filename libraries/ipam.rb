@@ -8,8 +8,8 @@ class IPAM
   end
 
   def suggest_ip(subnet)
-    client = Client.new(@url, @user, @password, ['suggest_ip', "?subnet=#{subnet}"])
-    Get.new(client).response['ip']
+    client = Client.new(@url, @user, @password, ['suggest_ip/'])
+    Post.new(client).response("subnet=#{subnet}&reserve_ip=yes")['ip']
   end
 
   def reserve_ip(ip)

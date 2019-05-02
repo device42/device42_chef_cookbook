@@ -38,5 +38,5 @@ This cookbook requires a Device42 appliance installed in your environment. Click
 
 #### Methods
 
- - `suggest_ip(subnet)`
- - `reserve_ip(ip)`
+ - `suggest_ip(subnet)` - Suggests and reserves the next available IP in a passed subnet in Device42
+ - `reserve_ip(ip)` - Reserves an passed IP in Device42
